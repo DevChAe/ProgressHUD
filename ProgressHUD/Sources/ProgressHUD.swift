@@ -268,7 +268,12 @@ extension ProgressHUD {
 			viewBackground?.addSubview(toolbarHUD!)
 		}
 
-		toolbarHUD?.backgroundColor = colorHUD
+        if colorHUD == .clear {
+            toolbarHUD?.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
+            toolbarHUD?.setShadowImage(UIImage(), forToolbarPosition: .any)
+        } else {
+            toolbarHUD?.backgroundColor = colorHUD
+        }
 	}
 }
 
