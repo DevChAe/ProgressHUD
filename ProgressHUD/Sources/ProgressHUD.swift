@@ -38,7 +38,7 @@ public class ProgressHUD: UIView {
 	var marginSize: CGFloat = 30
 
 	var viewBackground: UIView?
-	var toolbarHUD: UIToolbar?
+	var hudView: UIView?
 	var labelStatus: UILabel?
 
 	var viewProgress: ProgressView?
@@ -254,26 +254,20 @@ extension ProgressHUD {
 extension ProgressHUD {
 
 	private func removeToolbar() {
-		toolbarHUD?.removeFromSuperview()
-		toolbarHUD = nil
+        hudView?.removeFromSuperview()
+        hudView = nil
 	}
 
 	private func setupToolbar() {
-		if (toolbarHUD == nil) {
-			toolbarHUD = UIToolbar(frame: CGRect.zero)
-			toolbarHUD?.isTranslucent = true
-			toolbarHUD?.clipsToBounds = true
-			toolbarHUD?.layer.cornerRadius = 10
-			toolbarHUD?.layer.masksToBounds = true
-			viewBackground?.addSubview(toolbarHUD!)
+		if (hudView == nil) {
+            hudView = UIView(frame: CGRect.zero)
+            hudView?.clipsToBounds = true
+            hudView?.layer.cornerRadius = 10
+            hudView?.layer.masksToBounds = true
+			viewBackground?.addSubview(hudView!)
 		}
 
-        if colorHUD == .clear {
-            toolbarHUD?.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
-            toolbarHUD?.setShadowImage(UIImage(), forToolbarPosition: .any)
-        } else {
-            toolbarHUD?.backgroundColor = colorHUD
-        }
+        hudView?.backgroundColor = colorHUD
 	}
 }
 
@@ -291,7 +285,7 @@ extension ProgressHUD {
 			labelStatus?.textAlignment = .center
 			labelStatus?.baselineAdjustment = .alignCenters
 			labelStatus?.numberOfLines = 0
-			toolbarHUD?.addSubview(labelStatus!)
+            hudView?.addSubview(labelStatus!)
 		}
 
 		labelStatus?.text = text
@@ -318,7 +312,7 @@ extension ProgressHUD {
 		guard let viewProgress = viewProgress else { return }
 
 		if (viewProgress.superview == nil) {
-			toolbarHUD?.addSubview(viewProgress)
+            hudView?.addSubview(viewProgress)
 		}
 
 		viewProgress.setProgress(value)
@@ -341,7 +335,7 @@ extension ProgressHUD {
 		guard let viewLiveIcon = viewLiveIcon else { return }
 
 		if (viewLiveIcon.superview == nil) {
-			toolbarHUD?.addSubview(viewLiveIcon)
+            hudView?.addSubview(viewLiveIcon)
 		}
 
 		viewLiveIcon.layer.sublayers?.forEach {
@@ -370,7 +364,7 @@ extension ProgressHUD {
 		guard let viewStaticImage = viewStaticImage else { return }
 
 		if (viewStaticImage.superview == nil) {
-			toolbarHUD?.addSubview(viewStaticImage)
+            hudView?.addSubview(viewStaticImage)
 		}
 
 		viewStaticImage.image = image
@@ -394,7 +388,7 @@ extension ProgressHUD {
 		guard let viewAnimation = viewAnimation else { return }
 
 		if (viewAnimation.superview == nil) {
-			toolbarHUD?.addSubview(viewAnimation)
+            hudView?.addSubview(viewAnimation)
 		}
 
 		viewAnimation.subviews.forEach {
@@ -482,7 +476,7 @@ extension ProgressHUD {
 	}
 
 	private func setupSizes(_ width: CGFloat, _ height: CGFloat, _ center: CGPoint, _ rect: CGRect) {
-		toolbarHUD?.bounds = CGRect(x: 0, y: 0, width: ceil(width), height: ceil(height))
+        hudView?.bounds = CGRect(x: 0, y: 0, width: ceil(width), height: ceil(height))
 
 		viewProgress?.center = center
 		viewLiveIcon?.center = center
@@ -526,7 +520,7 @@ extension ProgressHUD {
 
 			UIView.animate(withDuration: animationDuration, delay: 0, options: .allowUserInteraction) { [self] in
 				viewBackground?.frame = main.bounds
-				toolbarHUD?.center = center
+                hudView?.center = center
 			}
 		}
 	}
@@ -558,12 +552,12 @@ extension ProgressHUD {
 	private func displayHUD() {
 		if (alpha == 0) {
 			alpha = 1
-			toolbarHUD?.alpha = 0
-			toolbarHUD?.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
+            hudView?.alpha = 0
+            hudView?.transform = CGAffineTransform(scaleX: 1.4, y: 1.4)
 
 			UIView.animate(withDuration: 0.15, delay: 0, options: [.allowUserInteraction, .curveEaseIn], animations: { [self] in
-				toolbarHUD?.transform = CGAffineTransform(scaleX: 1/1.4, y: 1/1.4)
-				toolbarHUD?.alpha = 1
+                hudView?.transform = CGAffineTransform(scaleX: 1/1.4, y: 1/1.4)
+                hudView?.alpha = 1
 			}, completion: nil)
 		}
 	}
@@ -571,8 +565,8 @@ extension ProgressHUD {
 	func dismissHUD() {
 		if (alpha == 1) {
 			UIView.animate(withDuration: 0.15, delay: 0, options: [.allowUserInteraction, .curveEaseIn], animations: { [self] in
-				toolbarHUD?.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
-				toolbarHUD?.alpha = 0
+                hudView?.transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
+                hudView?.alpha = 0
 			}, completion: { [self] _ in
 				destroyHUD()
 				alpha = 0
@@ -582,7 +576,7 @@ extension ProgressHUD {
 
 	func removeHUD() {
 		if (alpha == 1) {
-			toolbarHUD?.alpha = 0
+            hudView?.alpha = 0
 			destroyHUD()
 			alpha = 0
 		}
