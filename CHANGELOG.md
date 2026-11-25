@@ -1,5 +1,75 @@
 # Change Log
 
+## [15.0.3](https://github.com/relatedcode/ProgressHUD/releases/tag/15.0.3)
+
+Released on 2026-09-13.
+
+#### Fixed
+
+- Prevented an old banner cleanup task from clearing a newer banner.
+- Prevented success and error colors from carrying over to regular images.
+
+#### Changed
+
+- Centralized the repeated SwiftUI HUD presentation logic.
+- Passed animation colors and symbols directly to animation views.
+
+## [15.0.2](https://github.com/relatedcode/ProgressHUD/releases/tag/15.0.2)
+
+Released on 2026-08-02.
+
+#### Revision
+
+- Year bump.
+
+## [14.1.5](https://github.com/relatedcode/ProgressHUD/releases/tag/14.1.5)
+
+Released on 2026-08-02.
+
+#### Fixed
+
+- Restored the frosted HUD and banner backgrounds on iOS 26 by replacing `UIToolbar` with `UIVisualEffectView`.
+
+#### Changed
+
+- Default `colorHUD` is now `systemGray` with 10% opacity so the material blur remains visible.
+
+#### Revision
+
+- Year bump.
+
+## [15.0.1](https://github.com/relatedcode/ProgressHUD/releases/tag/15.0.1)
+
+Released on 2025-12-10.
+
+#### Changed
+
+- Increased the `swift-tools-version` to 5.9 in Package.swift.
+
+## [15.0.0](https://github.com/relatedcode/ProgressHUD/releases/tag/15.0.0)
+
+Released on 2025-11-28.
+
+#### Changed
+
+- Complete rewrite from UIKit to SwiftUI.
+- Minimum iOS requirement updated from iOS 13.0+ to iOS 17.0+.
+- Source path changed from `ProgressHUD/Sources` to `SwiftUI/Sources`.
+- All color, font, and image properties now use SwiftUI types (`Color`, `Font`, `Image`) instead of UIKit types.
+- Updated API to use SwiftUI's `@Observable` and modern Swift concurrency.
+
+#### Note
+
+- 15.x is SwiftUI. For UIKit, use 14.x releases.
+
+## [14.1.4](https://github.com/relatedcode/ProgressHUD/releases/tag/14.1.4)
+
+Released on 2025-07-04.
+
+#### Removed
+
+- Dropped CocoaPods support.
+
 ## [14.1.3](https://github.com/relatedcode/ProgressHUD/releases/tag/14.1.3)
 
 Released on 2024-05-09.

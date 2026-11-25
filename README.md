@@ -1,30 +1,18 @@
-<img src="https://rel.codes/hud/101.gif" width="80"> <img src="https://rel.codes/hud/001.gif" width="80"> <img src="https://rel.codes/hud/002.gif" width="80"> <img src="https://rel.codes/hud/003.gif" width="80"> <img src="https://rel.codes/hud/004.gif" width="80"> <img src="https://rel.codes/hud/005.gif" width="80"> <img src="https://rel.codes/hud/006.gif" width="80"> <img src="https://rel.codes/hud/007.gif" width="80"> <img src="https://rel.codes/hud/008.gif" width="80"> <img src="https://rel.codes/hud/009.gif" width="80"> <img src="https://rel.codes/hud/010.gif" width="80"> <img src="https://rel.codes/hud/011.gif" width="80"> <img src="https://rel.codes/hud/012.gif" width="80"> <img src="https://rel.codes/hud/013.gif" width="80"> <img src="https://rel.codes/hud/014.gif" width="80"> <img src="https://rel.codes/hud/015.gif" width="80"> <img src="https://rel.codes/hud/016.gif" width="80"> <img src="https://rel.codes/hud/017.gif" width="80"> <img src="https://rel.codes/hud/018.gif" width="80"> <img src="https://rel.codes/hud/019.gif" width="80"> <img src="https://rel.codes/hud/020.gif" width="80"> <img src="https://rel.codes/hud/021.gif" width="80"> <img src="https://rel.codes/hud/102.gif" width="80"> <img src="https://rel.codes/hud/103.gif" width="80"> <img src="https://rel.codes/hud/104.gif" width="80"> <img src="https://rel.codes/hud/202.gif" width="80"> <img src="https://rel.codes/hud/203.gif" width="80"> <img src="https://rel.codes/hud/204.gif" width="80"> <img src="https://rel.codes/hud/205.gif" width="80"> <img src="https://rel.codes/hud/206.gif" width="80"> <img src="https://rel.codes/hud/207.gif" width="80"> <img src="https://rel.codes/hud/208.gif" width="80"> <img src="https://rel.codes/hud/209.gif" width="80"> <img src="https://rel.codes/hud/210.gif" width="80"> <img src="https://rel.codes/hud/211.gif" width="80"> 
-
 ## WHAT'S NEW
 
 For detailed changes, please refer to the [Change log](CHANGELOG.md).
 
 ## OVERVIEW
 
-**ProgressHUD** is a convenient and intuitive HUD tool designed specifically for iOS. It enables seamless presentation of concise alerts or notifications to users of your app in a simple and non-disruptive way.
+**ProgressHUD** is a convenient and intuitive HUD tool designed specifically for iOS. It enables the seamless presentation of concise alerts or notifications to your app users in a simple and non-disruptive way.
+
+**Note:** 15.x is SwiftUI. For UIKit, use 14.x releases.
 
 ## INSTALLATION
 
-‼️ In case you're using Xcode 14.3.1 or an earlier version, stick with [13.8.6](https://github.com/relatedcode/ProgressHUD/releases/tag/13.8.6) ‼️
-
-### CocoaPods
-
-[CocoaPods](https://cocoapods.org) is a dependency manager for Swift and Objective-C Cocoa projects.
-
-To incorporate the **ProgressHUD** library into your Xcode project utilizing CocoaPods, please reference it within your `Podfile` as shown below:
-
-```ruby
-pod 'ProgressHUD'
-```
-
 ### Swift Package Manager
 
-[Swift Package Manager](https://swift.org/package-manager) is a tool for managing the distribution of Swift code.
+[Swift Package Manager](https://docs.swift.org/swiftpm/documentation/packagemanagerdocs/) is a tool for managing Swift code distribution.
 
 To add **ProgressHUD** as a dependency to your project, follow these steps:
 
@@ -35,9 +23,29 @@ To add **ProgressHUD** as a dependency to your project, follow these steps:
 
 ### Manually
 
-If you prefer not to use any of the dependency managers above, you can integrate **ProgressHUD** into your project manually. Just copy all the `*.swift` files from the `ProgressHUD/Sources` folder into your Xcode project.
+If you prefer not to use the dependency manager above, you can integrate **ProgressHUD** into your project manually. Simply copy all the `*.swift` files from the `SwiftUI/Sources` folder into your Xcode project.
 
 ## QUICK START
+
+### SwiftUI Setup
+
+Add the `.progressHUD()` modifier to your root view:
+
+```swift
+import SwiftUI
+
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .progressHUD()
+        }
+    }
+}
+```
+
+### Usage Examples
 
 ```swift
 ProgressHUD.banner("Banner title", "Banner message to display.")
@@ -96,6 +104,22 @@ ProgressHUD.symbol("Some text...", name: "sun.max")
 ```
 
 ```swift
+ProgressHUD.success("Success message")
+```
+
+```swift
+ProgressHUD.error("Error message")
+```
+
+```swift
+ProgressHUD.added("Item added")
+```
+
+```swift
+ProgressHUD.animate("Loading...", symbol: "star.fill")
+```
+
+```swift
 ProgressHUD.dismiss()
 ```
 
@@ -105,7 +129,7 @@ ProgressHUD.remove()
 
 ## REQUIREMENTS
 
-- iOS 13.0+
+- iOS 17.0+
 - Xcode 15.0+
 
 ## CUSTOMIZATION
@@ -117,23 +141,23 @@ ProgressHUD.animationType = .circleStrokeSpin
 ```
 
 ```swift
-ProgressHUD.colorHUD = .systemGray
+ProgressHUD.colorHUD = .gray.opacity(0.1)
 ```
 
 ```swift
-ProgressHUD.colorBackground = .lightGray
+ProgressHUD.colorBackground = .gray.opacity(0.3)
 ```
 
 ```swift
-ProgressHUD.colorAnimation = .systemBlue
+ProgressHUD.colorAnimation = .blue
 ```
 
 ```swift
-ProgressHUD.colorProgress = .systemBlue
+ProgressHUD.colorProgress = .blue
 ```
 
 ```swift
-ProgressHUD.colorStatus = .label
+ProgressHUD.colorStatus = .primary
 ```
 
 ```swift
@@ -142,12 +166,22 @@ ProgressHUD.marginSize = 50
 ```
 
 ```swift
-ProgressHUD.fontStatus = .boldSystemFont(ofSize: 24)
+ProgressHUD.fontStatus = .system(size: 24, weight: .bold)
 ```
 
 ```swift
-ProgressHUD.imageSuccess = UIImage(named: "success.png")
-ProgressHUD.imageError = UIImage(named: "error.png")
+ProgressHUD.imageSuccess = Image("success")
+ProgressHUD.imageError = Image("error")
+```
+
+Banner customization:
+
+```swift
+ProgressHUD.colorBanner = .blue.opacity(0.1)
+ProgressHUD.colorBannerTitle = .primary
+ProgressHUD.colorBannerMessage = .secondary
+ProgressHUD.fontBannerTitle = .system(size: 16, weight: .semibold)
+ProgressHUD.fontBannerMessage = .system(size: 14)
 ```
 
 A comprehensive list of the predefined enums:
@@ -191,7 +225,7 @@ public enum LiveIcon {
 
 MIT License
 
-Copyright (c) 2024 Related Code
+Copyright (c) 2026 Related Code
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
