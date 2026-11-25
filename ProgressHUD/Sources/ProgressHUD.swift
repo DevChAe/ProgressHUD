@@ -36,6 +36,7 @@ public class ProgressHUD: UIView {
 
 	var mediaSize: CGFloat = 70
 	var marginSize: CGFloat = 30
+	var centerInSafeArea = false
 
 	var viewBackground: UIView?
 	var toolbarHUD: UIVisualEffectView?
@@ -518,7 +519,16 @@ extension ProgressHUD {
 		}
 
 		DispatchQueue.main.async { [self] in
-			let center = CGPoint(x: main.bounds.size.width / 2, y: (main.bounds.size.height - heightKeyboard) / 2)
+			var insets = UIEdgeInsets.zero
+			if centerInSafeArea {
+				insets = main.safeAreaInsets
+				insets.bottom = max(insets.bottom, heightKeyboard)
+			} else {
+				insets.bottom = heightKeyboard
+			}
+
+			let center = CGPoint(x: insets.left + (main.bounds.size.width - insets.left - insets.right) / 2,
+								 y: insets.top + (main.bounds.size.height - insets.top - insets.bottom) / 2)
 
 			UIView.animate(withDuration: animationDuration, delay: 0, options: .allowUserInteraction) { [self] in
 				viewBackground?.frame = main.bounds

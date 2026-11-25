@@ -58,6 +58,12 @@ public extension ProgressHUD {
 		set { shared.marginSize = newValue }
 	}
 
+	/// true 이면 HUD를 화면 전체가 아닌 safe area 안쪽 영역의 가운데에 표시한다. (기본값 false)
+	class var centerInSafeArea: Bool {
+		get { shared.centerInSafeArea }
+		set { shared.centerInSafeArea = newValue }
+	}
+
 	class var animationType: AnimationType {
 		get { shared.animationType }
 		set { shared.animationType = newValue }
